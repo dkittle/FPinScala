@@ -1,4 +1,4 @@
-import chapter3.{List}
+import chapter3.{List, Nil}
 
 
 List.init(List(Nil))
