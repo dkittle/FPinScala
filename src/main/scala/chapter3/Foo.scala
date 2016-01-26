@@ -66,6 +66,12 @@ object List {
       case Cons(_, xs) => filter(xs, f)
     }
 
-k
+  def foldr[A, B](l: List[A], f: (A, B) => B, i: B) : B = {
+    l match {
+      case Nil => i
+      case Cons(h, xs) => f(h, foldr(xs, f, i))
+    }
   }
+
+
 }

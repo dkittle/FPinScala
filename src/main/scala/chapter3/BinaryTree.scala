@@ -10,17 +10,14 @@ case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
 object Tree {
 
-//  def apply[A](l: Tree[A], r: Tree[A]): Tree[A] = {
-//
-//  }
+  def size[A](t: Tree[A]): Int = t match {
+    case Leaf(_) => 1
+    case Branch(l, r) => size(l) + 1 + size(r)
+  }
 
-//  def size[A](t: Tree[A]): Int = {
-//    def count[A](t: Tree[A], acc: Int): Int = t match {
-//      case Leaf(_) => _
-//      case Branch(l,r) => size(l) + size(r)
-//    }
-//    count(t, 0)
-//  }
+  def highestValue(t: Tree[Int]): Int = t match {
+    case Leaf(_) => _
+    case Branch(l, r) => highestValue(l) max highestValue(r)
+  }
+
 }
-
-
