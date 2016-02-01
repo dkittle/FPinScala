@@ -4,6 +4,7 @@ import scala.{Some => _, None => _, Option => _, Either => _, _}
 
 import org.scalatest.{Matchers, FlatSpec}
 import chapter4.{Option, None, Some }
+import chapter4.Insurance._
 
 class OptionSpec extends FlatSpec with Matchers {
 
@@ -52,4 +53,13 @@ class OptionSpec extends FlatSpec with Matchers {
   "A seq of doubles 2, 5, 8" should "have a variance of 6" in {
     variance(Seq(2.0, 5.0, 8.0)) should be (Some(6.0))
   }
+
+  "An insurance quote" should "have a value of age * tickets * 1.23 using map2" in {
+    parseInsuranceQuote("18", "3") should be (Some(18 * 3 * 1.23))
+  }
+
+  "An insurance quote" should "have a value of age * tickets * 1.23 using map3" in {
+    parseInsuranceQuote2("18", "3") should be (Some(18 * 3 * 1.23))
+  }
+
 }

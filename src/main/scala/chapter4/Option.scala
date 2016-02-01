@@ -23,10 +23,9 @@ sealed trait Option[+A] {
     case _ => None
   }
 
-  def orElse[B >: A](ob: => Option[B]): Option[B] = ???
+//  def orElse[B >: A](ob: => Option[B]): Option[B] = ???
 
 }
-
 
 case class Some[+A](get: A) extends Option[A]
 case object None extends Option[Nothing]
