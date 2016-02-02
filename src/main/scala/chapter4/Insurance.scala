@@ -1,3 +1,7 @@
+
+
+
+
 package chapter4
 
 object Insurance {
@@ -13,11 +17,28 @@ object Insurance {
         f(aa, bb)))
   }
 
-  def map3[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = {
+  def mapOfHell[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Either[List[String], C] = {
+    (a, b) match {
+      case (None, None) => Left(List("age is invalid","number of tickets is invalid"))
+      case (None, _) => Left(List("age is invalid"))
+      case (_, None) => Left(List("number of tickets is invalid"))
+      case (Some(a),Some(b)) => Right(f(a,b))
+    }
+  }
+
+  def map3[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[Either[List[String], C]] = {
     for {
       aa <- a
       bb <- b
-    } yield f(aa, bb)
+    } yield {
+      print(s"foo ${aa} ${bb}")
+      (aa,bb) match {
+        case (None, None) => Left(List("age is invalid","number of tickets is invalid"))
+        case (None, _) => Left(List("age is invalid"))
+        case (_, None) => Left(List("number of tickets is invalid"))
+        case _ => Right(f(aa,bb))
+      }
+    }
   }
 
   def parseInsuranceQuote(age: String, numberOfSpeedingTickets: String) = {
@@ -26,10 +47,10 @@ object Insurance {
     map2(optAge, optTickets)(insuranceRateQuote)
   }
 
-  def parseInsuranceQuote2(age: String, numberOfSpeedingTickets: String) = {
+  def parseInsuranceQuoteHell(age: String, numberOfSpeedingTickets: String) = {
     val optAge: Option[Int] = Try(age.toInt)
     val optTickets: Option[Int] = Try(numberOfSpeedingTickets.toInt)
-    map3(optAge, optTickets)(insuranceRateQuote)
+    mapOfHell(optAge, optTickets)(insuranceRateQuote)
   }
 
   def insuranceRateQuote(age: Int, numberOfSpeedingTickets: Int): Double = {

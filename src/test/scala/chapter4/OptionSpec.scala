@@ -59,7 +59,11 @@ class OptionSpec extends FlatSpec with Matchers {
   }
 
   "An insurance quote" should "have a value of age * tickets * 1.23 using map3" in {
-    parseInsuranceQuote2("18", "3") should be (Some(18 * 3 * 1.23))
+    parseInsuranceQuoteHell("18", "3") should be (Right(18 * 3 * 1.23))
+  }
+
+  "An insurance quote" should "have an invalid age when using map3" in {
+    parseInsuranceQuoteHell("an 18 year old", "3") should be (Left(List("age is invalid")))
   }
 
 }
