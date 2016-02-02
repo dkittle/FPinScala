@@ -27,7 +27,7 @@ object Insurance {
   }
 
   def map3[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[Either[List[String], C]] = {
-    import InsuranceErrors._
+    import InsuranceError._
     for {
       aa <- a
       bb <- b
@@ -60,8 +60,8 @@ object Insurance {
 
 }
 
-object InsuranceErrors extends Enumeration {
-  type InsuranceErrors = Value
+object InsuranceError extends Enumeration {
+  type InsuranceError = Value
   val NoAge = "age is invalid"
   val NoTickets = "number of tickets is invalid"
 }

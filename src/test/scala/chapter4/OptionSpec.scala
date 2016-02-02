@@ -5,7 +5,7 @@ import scala.{Some => _, None => _, Option => _, Either => _, _}
 import org.scalatest.{Matchers, FlatSpec}
 import chapter4.{Option, None, Some }
 import chapter4.Insurance._
-import InsuranceErrors._
+import InsuranceError._
 
 class OptionSpec extends FlatSpec with Matchers {
 
