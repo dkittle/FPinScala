@@ -27,15 +27,16 @@ object Insurance {
   }
 
   def map3[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[Either[List[String], C]] = {
+    import InsuranceErrors._
     for {
       aa <- a
       bb <- b
     } yield {
       print(s"foo ${aa} ${bb}")
       (aa,bb) match {
-        case (None, None) => Left(List("age is invalid","number of tickets is invalid"))
-        case (None, _) => Left(List("age is invalid"))
-        case (_, None) => Left(List("number of tickets is invalid"))
+        case (None, None) => Left(List(NoAge, NoTickets))
+        case (None, _) => Left(List(NoAge))
+        case (_, None) => Left(List(NoTickets))
         case _ => Right(f(aa,bb))
       }
     }
@@ -57,4 +58,10 @@ object Insurance {
     age * numberOfSpeedingTickets * 1.23
   }
 
+}
+
+object InsuranceErrors extends Enumeration {
+  type InsuranceErrors = Value
+  val NoAge = "age is invalid"
+  val NoTickets = "number of tickets is invalid"
 }

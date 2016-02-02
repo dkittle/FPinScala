@@ -5,6 +5,7 @@ import scala.{Some => _, None => _, Option => _, Either => _, _}
 import org.scalatest.{Matchers, FlatSpec}
 import chapter4.{Option, None, Some }
 import chapter4.Insurance._
+import InsuranceErrors._
 
 class OptionSpec extends FlatSpec with Matchers {
 
@@ -63,7 +64,7 @@ class OptionSpec extends FlatSpec with Matchers {
   }
 
   "An insurance quote" should "have an invalid age when using map3" in {
-    parseInsuranceQuoteHell("an 18 year old", "3") should be (Left(List("age is invalid")))
+    parseInsuranceQuoteHell("an 18 year old", "3") should be (Left(List(NoAge)))
   }
 
 }
