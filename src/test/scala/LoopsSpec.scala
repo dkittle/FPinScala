@@ -28,4 +28,25 @@ class LoopsSpec extends FlatSpec with Matchers {
   "fib(6)" should "return 5" in {
     fib(6) should be (5)
   }
+
+  "findFirst" should "return 0" in {
+    findFirst(Array("hi","there","scala"), "hi") should be (0)
+  }
+
+  "findFirst" should "return 1" in {
+    findFirst(Array("hi","there","scala"), "there") should be (1)
+  }
+
+  "findFirst" should "return 2" in {
+    findFirst(Array("hi","there","scala"), "scala") should be (2)
+  }
+
+  "findFirst" should "return -1" in {
+    findFirst(Array("hi","there","scala"), "hello") should be (-1)
+  }
+
+  "findFirst with an empty array" should "return -1" in {
+    findFirst(Array[String](), "hello") should be (-1)
+  }
+  
 }

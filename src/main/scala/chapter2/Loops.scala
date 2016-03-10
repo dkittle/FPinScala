@@ -15,5 +15,21 @@ object Loops {
       rec(n - 1, 1, 0)
   }
 
+  // Section 2.5.1
+  def findFirst(as: Array[String], key: String): Int = {
+    @tailrec
+    def rec(as: Array[String], k: String, i: Int): Int = {
+      if (i >= as.length)
+        -1
+      else if (as(i) == k)
+        i
+      else
+        rec(as, k, i + 1)
+    }
+    rec(as, key, 0)
+  }
+
+  // Now make it a polymorphic function
+  def findFirst[A](a: Array[A], p: A => Boolean): Int = ???
 
 }
