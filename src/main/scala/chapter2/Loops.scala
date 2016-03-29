@@ -29,7 +29,45 @@ object Loops {
     rec(as, key, 0)
   }
 
-  // Now make it a polymorphic function
-  def findFirst[A](a: Array[A], p: A => Boolean): Int = ???
+  def findFirst2[A](a: Array[A], p: A => Boolean): Int = {
+    @tailrec
+    def rec(a: Array[A], i: Int, p: A => Boolean): Int = {
+      if (i >= a.length) -1
+      else if (p(a(i))) i
+      else rec(a, i + 1, p)
+    }
+    rec(a, 0, p)
+  }
+
+  def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean = {
+    @tailrec
+    def rec(a: Array[A], i: Int, f: (A,A) => Boolean): Boolean = {
+      if (i >= a.length - 1) true
+      else if (f(a(i), a(i + 1)) == false) false
+      else rec(a, i + 1, f)
+    }
+    if (as.length < 2) true
+    else rec(as, 0, ordered)
+  }
+
+  val isLessThan = new Function2[Int, Int, Boolean] {
+    def apply(a: Int, b: Int) = a < b
+  }
+
+  def partial1[A,B,C](a: A, f: (A,B) => C): B => C =
+    (b: B) => f(a, b)
+
+  def curry[A,B,C](f: (A, B) => C): A => (B => C) =
+    (a: A) => (b: B) => f(a,b)
+
+  def uncurry[A,B,C](f: A => B => C): (A, B) => C =
+    (a, b) => f(a)(b)
+
+  def compose[A,B,C](f: B => C, g: A => B): A => C =
+    a => f(g(a))
+
+  val func = (x: Double) => math.Pi / 2 - x
+
+  val cos = math.sin _ compose func
 
 }
