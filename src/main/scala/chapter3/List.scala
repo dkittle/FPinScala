@@ -3,7 +3,9 @@ package chapter3
 import scala.annotation.tailrec
 
 sealed trait List[+A]
+
 case object Nil extends List[Nothing]
+
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 object List {
@@ -48,8 +50,23 @@ object List {
 
   def append[A](a1: List[A], a2: List[A]): List[A] = a1 match {
     case Nil => a2
-    case Cons(h,t) => Cons(h, append(t, a2))
+    case Cons(h, t) => Cons(h, append(t, a2))
   }
 
-  
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(h, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
+  }
+
+  def filter[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Nil => Nil
+    case Cons(h, t) if (f(h)) => Cons(h, filter(t, f))
+    case Cons(_, t) => filter(t, f)
+  }
+
+  def foldr[A, B](l: List[A], f: (A, B) => B, i: B): B = l match {
+    case Nil => i
+    case Cons(h, xs) => f(h, foldr(xs, f, i))
+  }
 }

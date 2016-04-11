@@ -73,7 +73,16 @@ class ListSpec extends FlatSpec with Matchers {
   }
 
   "DropWhile _ % 2 == true with List(1,2,3,4,5,6)" should "be List(1,3,5)" in {
-    List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x % 2 == 0) should be (List(1,3,5))
+    List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x % 2 == 1) should be (List(2,3,4,5,6))
   }
+
+  "DropWhile _ < 4 with List(1,2,3,4,5,6)" should "be List(4,5,6)" in {
+    List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x < 4) should be (List(4,5,6))
+  }
+
+  "Init of List(1,2,3,4)" should "be List(1,2,3)" in {
+    List.init(List(1,2,3,4)) should be (List(1,2,3))
+  }
+
 
 }
