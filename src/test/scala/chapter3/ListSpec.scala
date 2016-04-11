@@ -36,4 +36,16 @@ class ListSpec extends FlatSpec with Matchers {
     List.product(Nil) should be (1)
   }
 
+  "Tail of List(1,2,3)" should "be List(2,3)" in {
+    List.tail(List(1,2,3)) should be (List(2,3))
+  }
+
+  "Tail of List(1)" should "be Nil" in {
+    List.tail(List(1)) should be (Nil)
+  }
+
+  "Tail of Nil" should "be Nil" in {
+    List.tail(Nil) should be (Nil)
+  }
+
 }
