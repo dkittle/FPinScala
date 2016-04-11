@@ -1,5 +1,7 @@
 package chapter3
 
+import scala.annotation.tailrec
+
 sealed trait List[+A]
 case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
@@ -26,4 +28,28 @@ object List {
     case Cons(h, t) => t
   }
 
+  def setHead[A](as: List[A], a: A): List[A] = as match {
+    case Nil => Cons(a, Nil)
+    case Cons(h, t) => Cons(a, t)
+  }
+
+  @tailrec
+  def drop[A](l: List[A], n: Int): List[A] = l match {
+    case Nil => Nil
+    case l if n > 0 => drop(tail(l), n - 1)
+    case l => l
+  }
+
+  @tailrec
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Cons(h, t) if f(h) => dropWhile(t, f)
+    case _ => l
+  }
+
+  def append[A](a1: List[A], a2: List[A]): List[A] = a1 match {
+    case Nil => a2
+    case Cons(h,t) => Cons(h, append(t, a2))
+  }
+
+  
 }

@@ -48,4 +48,32 @@ class ListSpec extends FlatSpec with Matchers {
     List.tail(Nil) should be (Nil)
   }
 
+  "SetHead of List(1,2,3) with 4" should "be List(4,2,3)" in {
+    List.setHead(List(1,2,3), 4) should be (List(4,2,3))
+  }
+
+  "SetHead of List(1) with 4" should "be List(4)" in {
+    List.setHead(List(1), 4) should be (List(4))
+  }
+
+  "SetHead of Nil with 4" should "be List(4)" in {
+    List.setHead(Nil, 4) should be (List(4))
+  }
+
+  "Drop 2 from List(1,2,3,4,5)" should "be List(3,4,5)" in {
+    List.drop(List(1,2,3,4,5), 2) should be (List(3,4,5))
+  }
+
+  "Drop 3 from List(1,2)" should "be Nil" in {
+    List.drop(List(1,2), 3) should be (Nil)
+  }
+
+  "Drop 1 from Nil" should "be Nil" in {
+    List.drop(Nil, 1) should be (Nil)
+  }
+
+  "DropWhile _ % 2 == true with List(1,2,3,4,5,6)" should "be List(1,3,5)" in {
+    List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x % 2 == 0) should be (List(1,3,5))
+  }
+
 }
