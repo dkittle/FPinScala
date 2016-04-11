@@ -1,7 +1,7 @@
-import chapter2.Loops2
-import org.scalatest.{Matchers, FlatSpec}
+package chapter2
 
-import Loops2._
+import chapter2.Loops2._
+import org.scalatest.{FlatSpec, Matchers}
 
 class LoopsSpec extends FlatSpec with Matchers {
 

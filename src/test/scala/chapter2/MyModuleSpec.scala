@@ -1,5 +1,7 @@
-import org.scalatest.{Matchers, FlatSpec}
+package chapter2
+
 import chapter2.MyModule._
+import org.scalatest.{FlatSpec, Matchers}
 
 class MyModuleSpec extends FlatSpec with Matchers {
 
