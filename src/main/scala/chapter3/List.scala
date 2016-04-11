@@ -15,4 +15,10 @@ object List {
     case Cons(x, xs) => x + sum(xs)
   }
 
+  def product(ds: List[Double]): Double = ds match {
+    case Nil => 1.0
+    case Cons(0.0, _) => 0.0
+    case Cons(x, xs) => x * product(xs)
+  }
+
 }
