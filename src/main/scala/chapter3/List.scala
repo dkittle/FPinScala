@@ -59,6 +59,11 @@ object List {
     case Cons(h, t) => Cons(h, init(t))
   }
 
+  def dropWhile2[A](as: List[A])(f: A => Boolean): List[A] = as match {
+    case Cons(h,t) if f(h) => dropWhile2(t)(f)
+    case _ => as
+  }
+
   def filter[A](l: List[A], f: A => Boolean): List[A] = l match {
     case Nil => Nil
     case Cons(h, t) if (f(h)) => Cons(h, filter(t, f))
@@ -69,4 +74,16 @@ object List {
     case Nil => i
     case Cons(h, xs) => f(h, foldr(xs, f, i))
   }
+
+  def foldRight[A,B](as: List[A], i: B)(f: (A, B) => B): B = as match {
+    case Nil => i
+    case Cons(x,xs) => f(x, foldRight(xs, i)(f))
+  }
+
+  def sum2(l: List[Int]) =
+    foldRight(l, 0)((x, y) => x + y)
+
+  def product2(l: List[Int]) =
+    foldRight(l, 1)((x, y) => x * y)
+
 }
