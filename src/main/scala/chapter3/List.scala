@@ -83,7 +83,7 @@ object List {
   def sum2(l: List[Int]) =
     foldRight(l, 0)((x, y) => x + y)
 
-  def product2(l: List[Int]) =
-    foldRight(l, 1)((x, y) => x * y)
+  def product2(l: List[Double]) =
+    foldRight(l, 1.0)(_ * _)
 
 }
