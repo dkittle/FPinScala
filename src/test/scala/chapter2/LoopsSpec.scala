@@ -57,6 +57,10 @@ class LoopsSpec extends FlatSpec with Matchers {
     isSorted(Array(1,2,3), (x: Int,y: Int) => x <= y) should be (true)
   }
 
+  "isSorted" should "also return true" in {
+    isSorted(Array(), (x: Int,y: Int) => x <= y) should be (true)
+  }
+
 
   "isSorted with two numbers desc" should "return false" in {
     isSorted(Array(3,2), (x: Int,y: Int) => x <= y) should be (false)

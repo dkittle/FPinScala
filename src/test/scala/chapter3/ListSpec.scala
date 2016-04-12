@@ -24,6 +24,10 @@ class ListSpec extends FlatSpec with Matchers {
     List.product(List(1,2,3,4)) should be (24)
   }
 
+  "A List of 1,2,0,4" should "multiply to 0" in {
+    List.product(List(1,2,0,4)) should be (0)
+  }
+
   "A List of 13" should "multiply to 13" in {
     List.product(List(13)) should be (13)
   }
@@ -72,20 +76,27 @@ class ListSpec extends FlatSpec with Matchers {
     List.drop(Nil, 1) should be (Nil)
   }
 
-  "DropWhile _ % 2 == true with List(1,2,3,4,5,6)" should "be List(1,3,5)" in {
-    List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x % 2 == 1) should be (List(2,3,4,5,6))
-  }
-
   "DropWhile _ < 4 with List(1,2,3,4,5,6)" should "be List(4,5,6)" in {
     List.dropWhile(List(1,2,3,4,5,6), (x: Int) => x < 4) should be (List(4,5,6))
+  }
+
+  "Some crazy stuff" should "be List(1,2,3)" in {
+    List.foldRight(List(1,2,3),Nil:List[Int])(Cons(_,_)) should be (List(1,2,3))
   }
 
   "Init of List(1,2,3,4)" should "be List(1,2,3)" in {
     List.init(List(1,2,3,4)) should be (List(1,2,3))
   }
 
-  "DropWhile _ % 2 == true with List(1,2,3,4,5,6)" should "also be List(2,3,4,5,6)" in {
-    List.dropWhile2(List(1,2,3,4,5,6))(x => x % 2 == 1) should be (List(2,3,4,5,6))
+  "length of List(1,2,3,4,5)" should "be 5" in {
+    List.length(List(1,2,3,4,5)) should be (5)
   }
 
+  "sum3 of List(7,8,9)" should "be 24" in {
+    List.sum3(List(7,8,9)) should be (24)
+  }
+
+  "reverse of List(1,2,3)" should "be List(3,2,1)" in {
+    List.reverse(List(1,2,3)) should be (List(3,2,1))
+  }
 }
