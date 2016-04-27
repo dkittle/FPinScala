@@ -31,12 +31,12 @@ class TreeSpec extends FlatSpec with Matchers {
   }
 
   it should "sum to 129" in {
-    val f =   Branch(Branch(Leaf(0), Leaf(123)), Branch(Leaf(2), Leaf(4)))
+    val f =   Branch(Branch(Leaf(0), Leaf(123)), Branch(Leaf(2), Branch(Leaf(0), Leaf(4))))
     Tree.sum(f) should be (129)
   }
 
   it should "have a depth of 1" in {
-    val f = Leaf(13)
+    val f = Leaf("13")
     Tree.depth(f) should be (1)
   }
 

@@ -25,18 +25,20 @@ object List {
 
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil
-    case Cons(e,t) => t
+    case Cons(_,t) => t
   }
 
   def setHead[A](l: List[A], e: A): List[A] =
     Cons(e, tail(l))
 
 
+  @tailrec
   def drop[A](l: List[A], n: Int): List[A] = n match {
     case 0 => l
     case _ => drop(tail(l), n - 1)
   }
 
+  @tailrec
   def dropWhile[A](l: List[A], p: A => Boolean): List[A] = l match {
     case Nil => Nil
     case Cons(h,t) if (p(h)) => dropWhile(t, p)
@@ -63,6 +65,7 @@ object List {
   def length[A](l: List[A]): Int =
     foldRight(l, 0)((a,b) => 1 + b)
 
+  @tailrec
   def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
     case Nil => z
     case Cons(e,t) => foldLeft(t, f(z, e))(f)

@@ -17,7 +17,7 @@ List(1,5,3,4,5) match {
   case _ => 101
 }
 
-List(1,2,8,4,5) match {
+List(8,2,3,4) match {
   case Cons(x, Cons(2, Cons(3, Cons(4, _)))) => x
   case Nil => 42
   case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
