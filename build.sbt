@@ -1,4 +1,4 @@
-name := "FunctionalProgramming"
+name := "fpinscala"
 
 version := "1.0"
 
